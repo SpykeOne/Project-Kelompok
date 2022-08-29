@@ -54,7 +54,8 @@ OrderItem.belongsTo(Product, {foreignKey:"id_product"})
 OrderItem.belongsTo(Order, {foreignKey: "id_order"})
 Order.hasMany(OrderItem, {foreignKey: "id_order"})
 
+Product.hasMany(ProductImage, {foreignKey: "id_product"})
+ProductImage.belongsTo(Product, {foreignKey: "id_product"})
 
-
-
-
+Product.belongsTo(ProductDescription, {foreignKey: "id_product"})
+ProductDescription.belongsTo(Product, {foreignKey: "id_product"})
