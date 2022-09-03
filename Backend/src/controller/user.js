@@ -150,11 +150,30 @@ const userController = {
             })
         }
     },
-    editAvatar: async (req, res) => {
+    editProfilePic: async (req, res) => {
         try{
-        
+            const {id_user} = req.params
+            const {filename} = req.file
+
+            await User.update({
+                profile_picture: `${process.env.UPLOAD_FILE_DOMAIN}/${process.env.PATH_PROFILEPIC}/${filename}`
+            },
+            {
+                where: {
+                    id: id_user
+                },
+            })
+
+            return res.status(200).json ({
+                message: "Profile Picture Updated"
+            })
+        } catch(err){
+            console.log(err)
+            return res.status(500).json({
+                message: "Error in updating profile picture"
+            })
         }
-    }
+    },
 }
 
 module.exports = userController
